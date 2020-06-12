@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/colorPrimary"
+        android:minHeight="?android:attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:elevation="4dp"
+    >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Some Text"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:textSize="18sp"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/searchButton"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/icons_search_50"
+                android:tint="#fff"
+                android:layout_marginLeft="10dp"
+            />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/addButton"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/icon_plus"
+                android:tint="#fff"
+                android:layout_marginLeft="10dp"
+            />
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <EditText
+        android:visibility="gone"
+        android:id="@+id/searchText"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="Search"
+        
+    />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        
+        android:scrollbars="vertical"
+        android:background="#e2e2e2"
+        
+        android:id="@+id/myRecycleView"
+    />
+</LinearLayout>
