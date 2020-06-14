@@ -12,12 +12,12 @@ using Android.Widget;
 
 namespace XamarinFirebase.Data_Models
 {
-    public class Preparations
+    public class Drugs
     {
         public string Name { get; set; }
-        public string Department { get; set; }
-        public string Status { get; set; }
-        public string Set { get; set; }
+        public string ActiveSubstance { get; set; }
+        public string Group { get; set; }
+        public string Form { get; set; }
         public string ID { get; set; }
     }
 }

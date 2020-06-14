@@ -8,6 +8,7 @@ using System;
 using XamarinFirebase.Adapter;
 using System.Collections.Generic;
 using XamarinFirebase.Data_Models;
+using XamarinFirebase.Fragments;
 
 namespace XamarinFirebase
 {
@@ -18,7 +19,10 @@ namespace XamarinFirebase
         ImageView searchButton;
         EditText searchText;
         RecyclerView myRecycleView;
-        List<Preparations> PreparationsList;
+        List<Drugs> DrugsList;
+        AddDrugFragment addDrugFragment;
+
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -32,27 +36,37 @@ namespace XamarinFirebase
             searchText = (EditText)FindViewById(Resource.Id.searchText);
 
             searchButton.Click += SearchButton_Click;
+
+            addButton.Click += AddButton_Click;
             CreateData();
 
             SetupRecycleView();
         }
 
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            addDrugFragment = new AddDrugFragment();
+            var trans = SupportFragmentManager.BeginTransaction();
+            addDrugFragment.Show(trans, "Новый препарат");
+        }
+
         private void SetupRecycleView()
         {
             myRecycleView.SetLayoutManager(new Android.Support.V7.Widget.LinearLayoutManager(myRecycleView.Context));
-            AdapterPreparations adapter = new AdapterPreparations(PreparationsList);
+            AdapterDrugs adapter = new AdapterDrugs(DrugsList);
             myRecycleView.SetAdapter(adapter);
         }
 
         public void CreateData()
         {
-            PreparationsList = new List<Preparations>();
-            PreparationsList.Add(new Preparations { Department = "Department 111", Name = "Name 111", ID = "1", Set = "2011", Status = "Status 111" });
-            PreparationsList.Add(new Preparations { Department = "Department 222", Name = "Name 222", ID = "2", Set = "2012", Status = "Status 111" });
-            PreparationsList.Add(new Preparations { Department = "Department 333", Name = "Name 333", ID = "3", Set = "2013", Status = "Status 111" });
-            PreparationsList.Add(new Preparations { Department = "Department 444", Name = "Name 444", ID = "4", Set = "2014", Status = "Status 111" });
-            PreparationsList.Add(new Preparations { Department = "Department 555", Name = "Name 555", ID = "5", Set = "2015", Status = "Status 111" });
-            PreparationsList.Add(new Preparations { Department = "Department 666", Name = "Name 666", ID = "6", Set = "2016", Status = "Status 111" });
+            DrugsList = new List<Drugs>();
+            DrugsList.Add(new Drugs { ActiveSubstance = "Department 111", Name = "Name 111", ID = "1", Form = "2011", Group = "Status 111" });
+            DrugsList.Add(new Drugs { ActiveSubstance = "Department 222", Name = "Name 222", ID = "2", Form = "2012", Group = "Status 222" });
+            DrugsList.Add(new Drugs { ActiveSubstance = "Department 333", Name = "Name 333", ID = "3", Form = "2013", Group = "Status 333" });
+            DrugsList.Add(new Drugs { ActiveSubstance = "Department 444", Name = "Name 444", ID = "4", Form = "2014", Group = "Status 444" });
+            DrugsList.Add(new Drugs { ActiveSubstance = "Department 555", Name = "Name 555", ID = "5", Form = "2015", Group = "Status 555" });
+            DrugsList.Add(new Drugs { ActiveSubstance = "Department 666", Name = "Name 666", ID = "6", Form = "2016", Group = "Status 666" });
+            DrugsList.Add(new Drugs { ActiveSubstance = "Department 666", Name = "Name 777", ID = "7", Form = "2017", Group = "Status 777" });
         }
 
         private void SearchButton_Click(object sender, System.EventArgs e)

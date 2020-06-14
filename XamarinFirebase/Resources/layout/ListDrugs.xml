@@ -18,22 +18,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Текст 1"
+            android:text="Какой-то препарат"
             android:textStyle="bold"
             android:textSize="18sp"
         />
 
         <TextView
-            android:id="@+id/departmentText"
+            android:id="@+id/activeSubstanceText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Департамент 1"
+            android:text="Какое-то действующее вещество"
             android:layout_below="@id/nameText"
         />
 
         <TextView
-            android:id="@+id/setText"
-            android:text="2012 SET"
+            android:id="@+id/formText"
+            android:text="Какая-то форма :3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -48,7 +48,7 @@
 
         <TextView
             android:id="@+id/status"
-            android:text="Status:"
+            android:text="Группа препарата:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -57,8 +57,8 @@
         />
 
         <TextView
-            android:id="@+id/statusText"
-            android:text="Ну хз, чето"
+            android:id="@+id/groupText"
+            android:text="какая-то группа"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
