@@ -12,6 +12,8 @@ namespace XamarinFirebase.Adapter
     {
         public event EventHandler<AdapterDrugsClickEventArgs> ItemClick;
         public event EventHandler<AdapterDrugsClickEventArgs> ItemLongClick;
+        public event EventHandler<AdapterDrugsClickEventArgs> DeleteItemClick;
+
         List<Drugs> Items;
 
         public AdapterDrugs(List<Drugs> Data)
@@ -26,7 +28,7 @@ namespace XamarinFirebase.Adapter
             //Setup your layout here
             View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ListDrugs, parent, false); ;
 
-            var vh = new AdapterDrugsViewHolder(itemView, OnClick, OnLongClick);
+            var vh = new AdapterDrugsViewHolder(itemView, OnClick, OnLongClick,OnDeleteClick);
             return vh;
         }
 
@@ -45,6 +47,7 @@ namespace XamarinFirebase.Adapter
 
         void OnClick(AdapterDrugsClickEventArgs args) => ItemClick?.Invoke(this, args);
         void OnLongClick(AdapterDrugsClickEventArgs args) => ItemLongClick?.Invoke(this, args);
+        void OnDeleteClick(AdapterDrugsClickEventArgs args) => DeleteItemClick(this, args);
 
     }
 
@@ -56,8 +59,10 @@ namespace XamarinFirebase.Adapter
         public TextView formText { get; set; }
         public ImageView deleteButton { get; set; }
 
-        public AdapterDrugsViewHolder(View itemView, Action<AdapterDrugsClickEventArgs> clickListener,
-                            Action<AdapterDrugsClickEventArgs> longClickListener) : base(itemView)
+        public AdapterDrugsViewHolder(View itemView, 
+            Action<AdapterDrugsClickEventArgs> clickListener,
+            Action<AdapterDrugsClickEventArgs> longClickListener, 
+            Action<AdapterDrugsClickEventArgs> deleteClickListener) : base(itemView)
         {
             //TextView = v;
             nameText = (TextView)itemView.FindViewById(Resource.Id.nameText);
@@ -70,6 +75,7 @@ namespace XamarinFirebase.Adapter
 
             itemView.Click += (sender, e) => clickListener(new AdapterDrugsClickEventArgs { View = itemView, Position = AdapterPosition });
             itemView.LongClick += (sender, e) => longClickListener(new AdapterDrugsClickEventArgs { View = itemView, Position = AdapterPosition });
+           deleteButton.Click += (sender, e) =>  deleteClickListener(new AdapterDrugsClickEventArgs { View = itemView, Position = AdapterPosition });
         }
     }
 

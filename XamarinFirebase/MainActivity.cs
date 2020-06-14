@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using XamarinFirebase.Data_Models;
 using XamarinFirebase.Fragments;
 using XamarinFirebase.EventListeners;
+using System.Linq;
 
 namespace XamarinFirebase
 {
@@ -22,9 +23,11 @@ namespace XamarinFirebase
         RecyclerView myRecycleView;
         List<Drugs> DrugsList;
 
-        DrugsListeners drugsListeners;
+        DrugsListeners drugsListener;
 
         AddDrugFragment addDrugFragment;
+
+        AdapterDrugs adapter;
 
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -39,14 +42,30 @@ namespace XamarinFirebase
             addButton = (ImageView)FindViewById(Resource.Id.addButton);
             searchText = (EditText)FindViewById(Resource.Id.searchText);
 
+            searchText.TextChanged += SearchText_TextChanged;
+
             searchButton.Click += SearchButton_Click;
 
             addButton.Click += AddButton_Click;
             RetriveData();
             //CreateData();
-
            // SetupRecycleView();
-        } 
+        }
+
+        private void SearchText_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        {
+            List<Drugs> searchResult =
+                (from drug in DrugsList
+                 where
+                    drug.Name.ToLower().Contains(searchText.Text.ToLower()) ||
+                    drug.ActiveSubstance.ToLower().Contains(searchText.Text.ToLower()) ||
+                    drug.Form.ToLower().Contains(searchText.Text.ToLower()) ||
+                    drug.Group.ToLower().Contains(searchText.Text.ToLower())
+                 select drug).ToList();
+
+            adapter = new AdapterDrugs(searchResult);
+            myRecycleView.SetAdapter(adapter);
+        }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
@@ -58,10 +77,27 @@ namespace XamarinFirebase
         private void SetupRecycleView()
         {
             myRecycleView.SetLayoutManager(new Android.Support.V7.Widget.LinearLayoutManager(myRecycleView.Context));
-            AdapterDrugs adapter = new AdapterDrugs(DrugsList);
+            adapter = new AdapterDrugs(DrugsList);
+            adapter.DeleteItemClick += Adapter_DeleteItemClick;
             myRecycleView.SetAdapter(adapter);
         }
 
+        private void Adapter_DeleteItemClick(object sender, AdapterDrugsClickEventArgs e)
+        {
+            string key = DrugsList[e.Position].ID;
+            Android.Support.V7.App.AlertDialog.Builder deleteDrug = new Android.Support.V7.App.AlertDialog.Builder(this);
+            deleteDrug.SetTitle("Удаление препарата");
+            deleteDrug.SetMessage("Вы уверены, что хотите удалить этот препарат?");
+            deleteDrug.SetPositiveButton("Удалить", (deleteAlert, args) =>
+            {
+                drugsListener.DeleteDrug(key);
+            });
+            deleteDrug.SetNegativeButton("Отменить", (deleteAlert, args) =>
+             {
+                 deleteDrug.Dispose();
+             });
+            deleteDrug.Show();
+        }
         //public void CreateData()
         //{
         //    DrugsList = new List<Drugs>();
@@ -76,9 +112,9 @@ namespace XamarinFirebase
 
         public void RetriveData()
         {
-            drugsListeners = new DrugsListeners();
-            drugsListeners.Create();
-            drugsListeners.DrugsRetrived += DrugsListeners_DrugsRetrived;
+            drugsListener = new DrugsListeners();
+            drugsListener.Create();
+            drugsListener.DrugsRetrived += DrugsListeners_DrugsRetrived;
         }
 
         private void DrugsListeners_DrugsRetrived(object sender, DrugsListeners.DrugsDataEventArgs e)

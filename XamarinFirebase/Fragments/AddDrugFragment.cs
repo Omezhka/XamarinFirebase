@@ -94,10 +94,12 @@ namespace XamarinFirebase.Fragments
 
         public void SetupFormSpinner()
         {
-            groupList = new List<string>();
-            groupList.Add("Группа такая-то");
-            groupList.Add("Группа эдакая");
-            groupList.Add("Группа какая-то");
+            groupList = new List<string>
+            {
+                "Группа такая-то",
+                "Группа эдакая",
+                "Группа какая-то"
+            };
 
             adapter = new ArrayAdapter<string>(Activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, groupList);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);

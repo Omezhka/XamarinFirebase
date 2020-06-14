@@ -40,12 +40,14 @@ namespace XamarinFirebase.EventListeners
                 drugsList.Clear();
                 foreach (DataSnapshot drugsData in child)
                 {
-                    Drugs drug = new Drugs();
-                    drug.ID = drugsData.Key;
-                    drug.Name = drugsData.Child("fullname").Value.ToString();
-                    drug.ActiveSubstance = drugsData.Child("activeSubstance").Value.ToString();
-                    drug.Form = drugsData.Child("form").Value.ToString();
-                    drug.Group = drugsData.Child("group").Value.ToString();
+                    Drugs drug = new Drugs
+                    {
+                        ID = drugsData.Key,
+                        Name = drugsData.Child("fullname").Value.ToString(),
+                        ActiveSubstance = drugsData.Child("activeSubstance").Value.ToString(),
+                        Form = drugsData.Child("form").Value.ToString(),
+                        Group = drugsData.Child("group").Value.ToString()
+                    };
 
                     drugsList.Add(drug);
                 }
@@ -57,6 +59,12 @@ namespace XamarinFirebase.EventListeners
         {
             DatabaseReference drugsRef = AppDataHelper.GetDatabase().GetReference("drug");
             drugsRef.AddValueEventListener(this);
+        }
+
+        public void DeleteDrug(string key)
+        {
+            DatabaseReference reference = AppDataHelper.GetDatabase().GetReference("drug/" + key);
+            reference.RemoveValue();
         }
     }
 }
