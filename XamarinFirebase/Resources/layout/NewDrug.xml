@@ -24,7 +24,7 @@
     />
 
     <LinearLayout
-        android:layout_height="355.5dp"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="vertical"
         >
@@ -32,7 +32,8 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/newFullnameText">
+            android:id="@+id/newFullnameText"
+            >
 
             <EditText
                 android:inputType="text"
@@ -73,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:imeOptions="actionNext"
+                
             />
 
         </android.support.design.widget.TextInputLayout>
@@ -96,6 +98,7 @@
             android:background="@color/colorPrimary"
             android:textColor="#fff"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             
         />
 

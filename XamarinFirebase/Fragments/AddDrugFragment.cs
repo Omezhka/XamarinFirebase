@@ -32,9 +32,13 @@ namespace XamarinFirebase.Fragments
 
         string group;
 
+        SupportV7.AlertDialog.Builder saveDataAlert;
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+           
 
             // Create your fragment here
         }
@@ -55,9 +59,9 @@ namespace XamarinFirebase.Fragments
             SetupFormSpinner();
            
             addDrugButton.Click += AddDrugButton_Click;
-            
-            
-            
+
+           
+
             return view;
         }
 
@@ -74,7 +78,7 @@ namespace XamarinFirebase.Fragments
             drugInfo.Put("form", form);
             drugInfo.Put("group", group);
 
-            SupportV7.AlertDialog.Builder saveDataAlert = new SupportV7.AlertDialog.Builder(Activity);
+            saveDataAlert = new SupportV7.AlertDialog.Builder(Activity);
 
             saveDataAlert.SetTitle("СОХРАНИТЬ НОВЫЙ ПРЕПАРАТ");
             saveDataAlert.SetMessage("Вы уверены?");
@@ -89,7 +93,60 @@ namespace XamarinFirebase.Fragments
                  saveDataAlert.Dispose();
              });
 
-            saveDataAlert.Show();
+            //if (fullname.Length == 0)
+            //{
+            //    newFullnameText.ErrorEnabled = true;
+            //    newFullnameText.Error = "Напиши че-нить";
+            //}
+            //else
+            //{
+            //    newFullnameText.ErrorEnabled = false;
+
+            //} 
+
+
+            //if(activeSubstance.Length == 0)
+            //{
+            //    newActiveSubstanceText.ErrorEnabled = true;
+            //    newActiveSubstanceText.Error = "Напиши че-нить";
+            //}
+            //else
+            //{
+            //    newFullnameText.ErrorEnabled = false;
+
+            //}
+
+            //if (form.Length == 0)
+            //{
+            //    newFormText.ErrorEnabled = true;
+            //    newFormText.Error = "Напиши че-нить";
+            //}
+            //else
+            //{ 
+
+            //}
+
+            CheckValid(fullname, newFullnameText);
+            CheckValid(activeSubstance, newActiveSubstanceText);
+            CheckValid(form, newFormText);
+
+            //saveDataAlert.Show();
+        }
+
+        private void CheckValid(string field, TextInputLayout inputLayout)
+        {
+            if (field.Length == 0)
+            {
+                inputLayout.ErrorEnabled = true;
+                inputLayout.Error = "Напиши че-нить";
+            }
+            else
+            {
+                inputLayout.ErrorEnabled = false;      
+                saveDataAlert.Show();
+            }
+
+            
         }
 
         public void SetupFormSpinner()
