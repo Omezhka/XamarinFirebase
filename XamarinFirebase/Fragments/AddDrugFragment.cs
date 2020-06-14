@@ -76,7 +76,7 @@ namespace XamarinFirebase.Fragments
 
             SupportV7.AlertDialog.Builder saveDataAlert = new SupportV7.AlertDialog.Builder(Activity);
 
-            saveDataAlert.SetTitle("СОХРАНИТЬ ИНФОРМАЦИЮ О НОВОМ ПРЕПАРАТЕ");
+            saveDataAlert.SetTitle("СОХРАНИТЬ НОВЫЙ ПРЕПАРАТ");
             saveDataAlert.SetMessage("Вы уверены?");
             saveDataAlert.SetPositiveButton("Продолжить", (senderAlert, args) =>
             {
