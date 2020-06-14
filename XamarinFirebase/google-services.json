@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "883929979823",
+    "firebase_url": "https://drug-reference-b6127.firebaseio.com",
+    "project_id": "drug-reference-b6127",
+    "storage_bucket": "drug-reference-b6127.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883929979823:android:7a0a7e19f9d2453d906d5a",
+        "android_client_info": {
+          "package_name": "com.companyname.xamarinfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883929979823-3dqf2efk2t62ptjnae94ut0uvgvndag9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0z4IEa1F4gfyNRS3y8baEq0EFbWp7OVU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883929979823-3dqf2efk2t62ptjnae94ut0uvgvndag9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

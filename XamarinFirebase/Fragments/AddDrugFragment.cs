@@ -11,7 +11,11 @@ using Android.Support.Design.Widget;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Firebase.Database;
 using FR.Ganfra.Materialspinner;
+using Java.Util;
+using XamarinFirebase.Helpers;
+using SupportV7 = Android.Support.V7.App;
 
 namespace XamarinFirebase.Fragments
 {
@@ -25,6 +29,8 @@ namespace XamarinFirebase.Fragments
 
         List<string> groupList;
         ArrayAdapter<string> adapter;
+
+        string group;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -44,9 +50,46 @@ namespace XamarinFirebase.Fragments
             newActiveSubstanceText = (TextInputLayout)view.FindViewById(Resource.Id.newActiveSubstanceText);
             newFormText = (TextInputLayout)view.FindViewById(Resource.Id.newFormText);
             newGroupSpinner = (MaterialSpinner)view.FindViewById(Resource.Id.newGroupSpinner);
-            addDrugButton = (Button)view.FindViewById(Resource.Id.addButton);
+            addDrugButton = (Button)view.FindViewById(Resource.Id.addDrugButton);
+            
             SetupFormSpinner();
+           
+            addDrugButton.Click += AddDrugButton_Click;
+            
+            
+            
             return view;
+        }
+
+        private void AddDrugButton_Click(object sender, EventArgs e)
+        {
+            string fullname = newFullnameText.EditText.Text;
+            string activeSubstance = newActiveSubstanceText.EditText.Text;
+            string form = newFormText.EditText.Text;
+
+            HashMap drugInfo = new HashMap();
+
+            drugInfo.Put("fullname", fullname);
+            drugInfo.Put("activeSubstance", activeSubstance);
+            drugInfo.Put("form", form);
+            drugInfo.Put("group", group);
+
+            SupportV7.AlertDialog.Builder saveDataAlert = new SupportV7.AlertDialog.Builder(Activity);
+
+            saveDataAlert.SetTitle("СОХРАНИТЬ ИНФОРМАЦИЮ О НОВОМ ПРЕПАРАТЕ");
+            saveDataAlert.SetMessage("Вы уверены?");
+            saveDataAlert.SetPositiveButton("Продолжить", (senderAlert, args) =>
+            {
+                DatabaseReference newDrugRef = AppDataHelper.GetDatabase().GetReference("drug").Push();
+                newDrugRef.SetValue(drugInfo);
+                this.Dismiss();
+            });
+            saveDataAlert.SetNegativeButton("Закрыть", (senderAlert, args) =>
+             {
+                 saveDataAlert.Dispose();
+             });
+
+            saveDataAlert.Show();
         }
 
         public void SetupFormSpinner()
@@ -60,6 +103,16 @@ namespace XamarinFirebase.Fragments
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 
             newGroupSpinner.Adapter = adapter;
+
+            newGroupSpinner.ItemSelected += NewGroupSpinner_ItemSelected;
+        }
+
+        private void NewGroupSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            if (e.Position != -1)
+            {
+                group = groupList[e.Position];
+            }
         }
     }
 }
