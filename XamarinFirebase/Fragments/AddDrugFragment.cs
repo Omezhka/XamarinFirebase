@@ -134,9 +134,12 @@ namespace XamarinFirebase.Fragments
                 "Группа эдакая",
                 "Группа какая-то"
             };
+            
 
             adapter = new ArrayAdapter<string>(Activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, groupList);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+
+            newGroupSpinner.SetSelection(1);
 
             newGroupSpinner.Adapter = adapter;
 
