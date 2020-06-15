@@ -34,7 +34,7 @@
 
         <TextView
             android:id="@+id/formText"
-            android:text="Какая-то форма :3"
+            android:text="Какая-то форма"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

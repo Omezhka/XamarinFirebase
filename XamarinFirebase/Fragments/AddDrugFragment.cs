@@ -29,7 +29,6 @@ namespace XamarinFirebase.Fragments
 
         List<string> groupList;
         ArrayAdapter<string> adapter;
-
         string group;
 
         SupportV7.AlertDialog.Builder saveDataAlert;
@@ -55,6 +54,7 @@ namespace XamarinFirebase.Fragments
             newFormText = (TextInputLayout)view.FindViewById(Resource.Id.newFormText);
             newGroupSpinner = (MaterialSpinner)view.FindViewById(Resource.Id.newGroupSpinner);
             addDrugButton = (Button)view.FindViewById(Resource.Id.addDrugButton);
+
             
             SetupFormSpinner();
            
@@ -93,60 +93,37 @@ namespace XamarinFirebase.Fragments
                  saveDataAlert.Dispose();
              });
 
-            //if (fullname.Length == 0)
-            //{
-            //    newFullnameText.ErrorEnabled = true;
-            //    newFullnameText.Error = "Напиши че-нить";
-            //}
-            //else
-            //{
-            //    newFullnameText.ErrorEnabled = false;
+            
 
-            //} 
+            bool firstFieldValid = CheckValid(fullname, newFullnameText);
+            bool secondFieldValid = CheckValid(activeSubstance, newActiveSubstanceText);
+            bool thirdFieldValid = CheckValid(form, newFormText);
 
 
-            //if(activeSubstance.Length == 0)
-            //{
-            //    newActiveSubstanceText.ErrorEnabled = true;
-            //    newActiveSubstanceText.Error = "Напиши че-нить";
-            //}
-            //else
-            //{
-            //    newFullnameText.ErrorEnabled = false;
-
-            //}
-
-            //if (form.Length == 0)
-            //{
-            //    newFormText.ErrorEnabled = true;
-            //    newFormText.Error = "Напиши че-нить";
-            //}
-            //else
-            //{ 
-
-            //}
-
-            CheckValid(fullname, newFullnameText);
-            CheckValid(activeSubstance, newActiveSubstanceText);
-            CheckValid(form, newFormText);
+            if (firstFieldValid && secondFieldValid && thirdFieldValid)
+            {
+                saveDataAlert.Show();
+            }
 
             //saveDataAlert.Show();
         }
 
-        private void CheckValid(string field, TextInputLayout inputLayout)
+        private bool CheckValid(string fieldText,TextInputLayout inputLayout)
         {
-            if (field.Length == 0)
+
+            inputLayout.ErrorEnabled = true;
+
+            if (fieldText.Length == 0)
             {
                 inputLayout.ErrorEnabled = true;
                 inputLayout.Error = "Напиши че-нить";
             }
             else
             {
-                inputLayout.ErrorEnabled = false;      
-                saveDataAlert.Show();
+                inputLayout.ErrorEnabled = false;
+                return true;
             }
-
-            
+            return false;
         }
 
         public void SetupFormSpinner()

@@ -39,6 +39,7 @@
                 android:layout_marginLeft="10dp"
             />
 
+            <!--ето для про юзеров надо будет закомментить для 3 главы-->
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"

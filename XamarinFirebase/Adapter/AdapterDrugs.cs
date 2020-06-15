@@ -37,10 +37,10 @@ namespace XamarinFirebase.Adapter
         {
             var holder = viewHolder as AdapterDrugsViewHolder;
             //holder.TextView.Text = items[position];
-            holder.nameText.Text = Items[position].Name;
-            holder.activeSubstanceText.Text = Items[position].ActiveSubstance;
-            holder.groupText.Text = Items[position].Group;
-            holder.formText.Text = Items[position].Form;
+            holder.NameText.Text = Items[position].Name;
+            holder.ActiveSubstanceText.Text = Items[position].ActiveSubstance;
+            holder.GroupText.Text = Items[position].Group;
+            holder.FormText.Text = Items[position].Form;
         }
 
         public override int ItemCount => Items.Count;
@@ -53,11 +53,11 @@ namespace XamarinFirebase.Adapter
 
     public class AdapterDrugsViewHolder : RecyclerView.ViewHolder
     {
-        public TextView nameText { get; set; }
-        public TextView activeSubstanceText { get; set; }
-        public TextView groupText { get; set; }
-        public TextView formText { get; set; }
-        public ImageView deleteButton { get; set; }
+        public TextView NameText { get; set; }
+        public TextView ActiveSubstanceText { get; set; }
+        public TextView GroupText { get; set; }
+        public TextView FormText { get; set; }
+        public ImageView DeleteButton { get; set; }
 
         public AdapterDrugsViewHolder(View itemView, 
             Action<AdapterDrugsClickEventArgs> clickListener,
@@ -65,17 +65,17 @@ namespace XamarinFirebase.Adapter
             Action<AdapterDrugsClickEventArgs> deleteClickListener) : base(itemView)
         {
             //TextView = v;
-            nameText = (TextView)itemView.FindViewById(Resource.Id.nameText);
-            activeSubstanceText = (TextView)itemView.FindViewById(Resource.Id.activeSubstanceText);
-            groupText = (TextView)itemView.FindViewById(Resource.Id.groupText);
-            formText = (TextView)itemView.FindViewById(Resource.Id.formText);
-            deleteButton = (ImageView)itemView.FindViewById(Resource.Id.deleteButton);
+            NameText = (TextView)itemView.FindViewById(Resource.Id.nameText);
+            ActiveSubstanceText = (TextView)itemView.FindViewById(Resource.Id.activeSubstanceText);
+            GroupText = (TextView)itemView.FindViewById(Resource.Id.groupText);
+            FormText = (TextView)itemView.FindViewById(Resource.Id.formText);
+            DeleteButton = (ImageView)itemView.FindViewById(Resource.Id.deleteButton);
 
 
 
             itemView.Click += (sender, e) => clickListener(new AdapterDrugsClickEventArgs { View = itemView, Position = AdapterPosition });
             itemView.LongClick += (sender, e) => longClickListener(new AdapterDrugsClickEventArgs { View = itemView, Position = AdapterPosition });
-           deleteButton.Click += (sender, e) =>  deleteClickListener(new AdapterDrugsClickEventArgs { View = itemView, Position = AdapterPosition });
+           DeleteButton.Click += (sender, e) =>  deleteClickListener(new AdapterDrugsClickEventArgs { View = itemView, Position = AdapterPosition });
         }
     }
 
