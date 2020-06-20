@@ -116,7 +116,7 @@ namespace XamarinFirebase.Fragments
             if (fieldText.Length == 0)
             {
                 inputLayout.ErrorEnabled = true;
-                inputLayout.Error = "Напиши че-нить";
+                inputLayout.Error = "Напишите что-нибудь";
             }
             else
             {
@@ -130,16 +130,27 @@ namespace XamarinFirebase.Fragments
         {
             groupList = new List<string>
             {
-                "Группа такая-то",
-                "Группа эдакая",
-                "Группа какая-то"
+                "Цефалоспорины – АБ",
+                "Азалиды – АБ",
+                "Регидратирующее",
+                "Линкозамиды – АБ",
+                "Пр. фосфоновой кислоты – АБ",
+                "Рифаксимин – АБ",
+                "Хлорамфеникол – АБ",
+                "Тетрациклины – АБ",
+                "Хинолоны – противомикробное",
+                "Противоподагрическое",
+                "Противогрибковое",
+                "Вазодилатирующее",
+                "Метаболическое"
             };
-            
 
+            groupList.Sort();
             adapter = new ArrayAdapter<string>(Activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, groupList);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 
             newGroupSpinner.SetSelection(1);
+            
 
             newGroupSpinner.Adapter = adapter;
 
